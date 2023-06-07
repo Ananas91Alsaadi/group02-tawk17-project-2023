@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . "/../../Template.php";
-require_once __DIR__ . "/../../../api/movieDBAPI.php";
+require_once __DIR__ . "/../../../movieDB-api/movieDBAPI.php";
 
 
 $data = $this->model[0];
