@@ -7,49 +7,24 @@ function showHide(){
 
 var activeMovie=[];
 
-async function sendAPI(x){
+async function sendAPI(x,homePath){
 
+ 
+ let response = await fetch('/'+ homePath +'/api/comments/autocomplete/' + x, { 
+   method: "GET",
+ });
+ 
+ let data = await response.json();
+ console.log(data);
+return data;
 
-  /*
-
-    const query = x;
-  
-    fetch( '../api/autocomplete?query=' + encodeURIComponent(query))
-      .then(response => response.json())
-      .then(data => {
-        // Handle the response data
-        console.log(data); // Assuming the response is an array of movie titles
-        return data;
-
-      })
-      .catch(error => {
-        // Handle any errors
-        console.error(error);
-        return error;
-
-      });
-
-*/
-
-  let headersList = {
-  }
-
-  let passKey='a59c8f7b02647ddf96bb679b651d2d37';
-  
-  let response = await fetch("https://api.themoviedb.org/3/search/multi?api_key="+passKey+"&language=en-US&query="+x+"&page=1&include_adult=false", { 
-    method: "GET",
-    headers: headersList
-    
-  });
-  let data = await response.text();
-  data = JSON.parse(data);
-//console.log(DB_DATABASE);
-  return data;
 }
 
-async function searchMovies(x) {
+async function searchMovies(x,homePath) {
 
- let data = await sendAPI(x);
+ let data = await sendAPI(x,homePath);
+if (data){
+
 
    const autocompleteList = document.getElementById("sug");
    autocompleteList.innerHTML = ''; // Clear previous results
@@ -70,6 +45,8 @@ async function searchMovies(x) {
    }else{autocompleteList.style.display="block"}
    
   }
+
+}
 
 window.addEventListener('DOMContentLoaded', () => {
   
@@ -102,6 +79,4 @@ console.log(starLabels);
 
 }
 
-function submitForm() {
-  //document.getElementById("myForm").submit(); // Submit the form
-}
+

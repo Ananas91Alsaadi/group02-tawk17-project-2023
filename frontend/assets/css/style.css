@@ -170,6 +170,7 @@ input[type=submit] {
 
 .movie-box {
   display: flex;
+  flex-wrap: wrap;
 }
 
 .rating-stars {
