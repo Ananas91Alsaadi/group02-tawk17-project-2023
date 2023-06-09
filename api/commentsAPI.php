@@ -7,6 +7,7 @@ if (!defined('MOVIE_REVIEWER') && basename($_SERVER['PHP_SELF']) == basename(__F
 
 require_once __DIR__ . "/RestAPI.php";
 require_once __DIR__ . "/../business-logic/commentsService.php";
+require_once __DIR__ . "/../movieDB-api/movieDBAPI.php";
 
 
 class commentsAPI extends RestAPI
@@ -25,12 +26,18 @@ class commentsAPI extends RestAPI
         else if ($this->path_count == 3 && $this->method == "GET") {
             $this->getById($this->path_parts[2]);
         }
+        // GET: /api/comments/autocomplete/query
+
+        else if ($this->path_count == 4 && $this->method == "GET" && $this->path_parts[2] == "autocomplete") {
+            $this->getAutocomplete($this->path_parts[3]);
+        }
 
         // POST: /api/comments
         else if ($this->path_count == 2 && $this->method == "POST") {
             $this->postOne();
         }
 
+     
 
         // PUT: /api/comments/{id}
         else if ($this->path_count == 3 && $this->method == "PUT") {
@@ -159,5 +166,23 @@ class commentsAPI extends RestAPI
         } else {
             $this->error();
         }
+    }
+
+    private function getAutocomplete($x)
+    {
+        // only admins can delete comments
+       // $this->requireAuth();
+
+        $movies = movieDBAPI::getTopMovieByName($x);
+        
+        if ($movies == null) {
+            return "Not found";
+        }
+       // var_dump($movies);
+        $this->sendJson($movies);
+
+       // return $movies;
+
+
     }
 }

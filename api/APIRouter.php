@@ -27,7 +27,6 @@ class APIRouter
             // will load the commentsAPI class
             "auth" => "AuthAPI",
             "comments" => "commentsAPI",
-            //'autocomplete' => 'autocompleteAPI',
             "root" => "APIRoot",
         ];
 

@@ -7,7 +7,7 @@ if (!defined('MOVIE_REVIEWER') && basename($_SERVER['PHP_SELF']) == basename(__F
     die('This file cannot be accessed directly.');
 }
 
-require_once __DIR__ . "/RestAPI.php";
+require_once __DIR__ . "/../api/RestAPI.php";
 //require_once __DIR__ . "/../business-logic/AuthService.php";
 
 // Class for handling requests to "api/auth"
