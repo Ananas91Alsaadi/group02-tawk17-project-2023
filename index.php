@@ -1,7 +1,7 @@
 <?php
 
 // Define global constant to prevent direct script loading 
-define('MOVIE_REVIEWER', true);
+define('MY_APP', true);
 
 
 // Load the routers responsible for handling API requests
@@ -10,8 +10,8 @@ require_once __DIR__ . "/api/APIRouter.php";
 require_once __DIR__ . "/frontend/FrontendRouter.php";
 
 // Get URL path
-// http://localhost/multitier-shop/[api/comments/5]
-// http://localhost/multitier-shop/[home/comments] [PATH]
+// http://localhost/multitier-shop/[api/purchases/5]
+// http://localhost/multitier-shop/[home/purchases] [PATH]
 $path = $_GET["path"]; 
 
 $path_parts = explode("/", $path);
